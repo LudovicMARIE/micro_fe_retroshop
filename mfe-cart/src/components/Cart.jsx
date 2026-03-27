@@ -8,11 +8,19 @@ function Cart() {
   const total = items.reduce((sum, item) => sum + item.price, 0);
 
   useEffect(() => {
-    // TODO: ecouter les ajouts de produits et mettre a jour le state
+    const handleProductAdded = (product) => {
+        setItems(prev => [...prev, {...product, cartId: Date.now()}]);
+    };
+
+    eventBus.on('PRODUCT_ADDED', handleProductAdded);
+
+    return () => {
+        eventBus.off('PRODUCT_ADDED', handleProductAdded);
+    };
   }, []);
 
   useEffect(() => {
-    // TODO: notifier le reste de l'application quand le panier change
+    eventBus.emit('CART_UPDATED', items);
   }, [items]);
 
   const handleRemove = (cartId) => {
