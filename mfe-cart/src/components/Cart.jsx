@@ -9,14 +9,11 @@ function Cart() {
 
   useEffect(() => {
     const handleProductAdded = (product) => {
-        setItems(prev => [...prev, {...product, cartId: Date.now()}]);
+      setItems((prev) => [...prev, { ...product, cartId: Date.now() }]);
     };
 
     eventBus.on('PRODUCT_ADDED', handleProductAdded);
-
-    return () => {
-        eventBus.off('PRODUCT_ADDED', handleProductAdded);
-    };
+    return () => eventBus.off('PRODUCT_ADDED', handleProductAdded);
   }, []);
 
   useEffect(() => {
@@ -24,12 +21,10 @@ function Cart() {
   }, [items]);
 
   const handleRemove = (cartId) => {
-    setItems(prev => prev.filter(item => item.cartId !== cartId));
+    setItems((prev) => prev.filter((item) => item.cartId !== cartId));
   };
 
-  const handleClear = () => {
-    setItems([]);
-  };
+  const handleClear = () => setItems([]);
 
   return (
     <div className="cart">
@@ -39,7 +34,7 @@ function Cart() {
       ) : (
         <>
           <ul className="cart-items">
-            {items.map(item => (
+            {items.map((item) => (
               <li key={item.cartId} className="cart-item">
                 <span className="item-name">{item.name}</span>
                 <span className="item-price">{item.price} EUR</span>

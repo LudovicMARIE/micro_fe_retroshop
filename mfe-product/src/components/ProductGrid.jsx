@@ -28,7 +28,7 @@ function ProductGrid() {
     <div className="product-grid">
       <h2>Catalogue</h2>
       <div className="grid">
-        {PRODUCTS.map(p => (
+        {PRODUCTS.map((p) => (
           <ProductCard key={p.id} product={p} onAdd={handleAdd} />
         ))}
       </div>

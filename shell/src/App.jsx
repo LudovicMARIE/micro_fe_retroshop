@@ -5,23 +5,27 @@ import eventBus from 'shared/eventBus';
 const ProductGrid = lazy(() => import('mfeProduct/./ProductGrid'));
 const Cart = lazy(() => import('mfeCart/./Lobby'));
 const Recommendations = lazy(() =>
-    import('mfeReco/./Recommendations').catch((err) => {
-        console.error("MFE Recommendations indisponible:", err);
-        return new Promise(() => {});
-    })
+  import('mfeReco/./Recommendations').catch((err) => {
+    console.error('MFE Recommendations indisponible:', err);
+    return new Promise(() => {});
+  })
 );
-function LoadingFallback({ name }) {
-  return <div className="loading-fallback">Chargement {name}...</div>;
-}
+
+const LoadingFallback = ({ name }) => (
+  <div className="loading-fallback">Chargement {name}...</div>
+);
+
+const WithSuspense = ({ name, children }) => (
+  <Suspense fallback={<LoadingFallback name={name} />}>
+    {children}
+  </Suspense>
+);
 
 function App() {
   const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
-    const unsubscribe = eventBus.on('CART_UPDATED', (items) => {
-      setCartCount(items.length);
-    });
-    return unsubscribe;
+    return eventBus.on('CART_UPDATED', (items) => setCartCount(items.length));
   }, []);
 
   return (
@@ -32,20 +36,14 @@ function App() {
       </header>
       <main className="shell-main">
         <section className="product-area">
-          <Suspense fallback={<LoadingFallback name="Products" />}>
-            <ProductGrid />
-          </Suspense>
+          <WithSuspense name="Products"><ProductGrid /></WithSuspense>
         </section>
         <aside className="cart-area">
-          <Suspense fallback={<LoadingFallback name="Cart" />}>
-            <Cart />
-          </Suspense>
+          <WithSuspense name="Cart"><Cart /></WithSuspense>
         </aside>
       </main>
       <section className="reco-area">
-        <Suspense fallback={<LoadingFallback name="Recommendations" />}>
-          <Recommendations />
-        </Suspense>
+        <WithSuspense name="Recommendations"><Recommendations /></WithSuspense>
       </section>
     </div>
   );
