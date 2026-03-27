@@ -16,7 +16,7 @@ function Recommendations() {
 
   return (
     <div className="recommendations">
-      <h2>Les joueurs achetent aussi</h2>
+      <h2>Les joueurs achètent aussi</h2>
       <div className="reco-list">
         {recos.map(p => (
           <div key={p.id} className="reco-card" onClick={() => handleAddReco(p)}>

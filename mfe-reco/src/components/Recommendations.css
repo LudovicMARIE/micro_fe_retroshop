@@ -1,21 +1,33 @@
+body {
+  background: #0a0a0f;
+  color: #e0e0e0;
+  font-family: "Inter", sans-serif;
+  /* min-height: 100vh; */
+  overflow-x: hidden;
+}
+
 .recommendations {
   padding: 24px;
 }
 
 .recommendations h2 {
-  font-family: 'Press Start 2P', 'Outfit', monospace;
-  font-size: 16px;
-  color: #39ff14;
-  margin: 0 0 20px 0;
-  text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+  font-family: "Press Start 2P", "Outfit", monospace;
+  font-size: 2em;
+  color: #ff00aa;
+  margin: 0 0 1em 0;
+  text-shadow: 0 0 10px #aa0070;
+  text-align: center;
 }
 
 /* --- Reco List (horizontal scroll) --- */
 .reco-list {
   display: flex;
-  gap: 16px;
+  gap: 2rem;
   overflow-x: auto;
-  padding-bottom: 8px;
+  /* padding-bottom: 8px; */
+  padding: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .reco-list::-webkit-scrollbar {
@@ -41,22 +53,26 @@
   background: #1a1a2e;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
-  padding: 14px;
-  min-width: 160px;
-  max-width: 180px;
+  padding: 1em;
+  /* min-width: 160px; */
+  /* max-width: 180px; */
+  width: 20%;
+  height: 8rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 8px;
   cursor: pointer;
   transition: all 0.25s ease;
   flex-shrink: 0;
+  align-items: center;
 }
 
 .reco-card:hover {
-  box-shadow: 0 0 18px rgba(57, 255, 20, 0.35), 0 0 40px rgba(57, 255, 20, 0.1);
+  box-shadow:
+    0 0 18px rgba(204, 20, 255, 0.35),
+    0 0 40px rgba(145, 20, 255, 0.1);
   transform: scale(1.05);
-  border-color: rgba(57, 255, 20, 0.3);
+  border-color: rgba(255, 20, 224, 0.3);
 }
 
 .reco-card:active {
@@ -71,8 +87,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 9px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 1em;
   color: rgba(0, 0, 0, 0.7);
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -97,7 +113,7 @@
 /* --- Reco Text --- */
 .reco-name {
   color: #e0e0e0;
-  font-size: 13px;
+  font-size: 1.2em;
   font-weight: 600;
   text-align: center;
   line-height: 1.3;
@@ -106,6 +122,6 @@
 .reco-price {
   color: #39ff14;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 1em;
   text-shadow: 0 0 6px rgba(57, 255, 20, 0.3);
 }
